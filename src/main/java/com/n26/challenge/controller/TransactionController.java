@@ -19,12 +19,8 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity<?> create(@RequestBody Transaction transaction) {
-        try {
-            transactionService.create(transaction);
-        } catch (TransactionException e) {
-            return new ResponseEntity<TransactionException>(HttpStatus.NO_CONTENT);
-        }
+    public ResponseEntity<?> create(@RequestBody Transaction transaction) throws TransactionException {
+        transactionService.create(transaction);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
