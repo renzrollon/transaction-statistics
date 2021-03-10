@@ -22,7 +22,7 @@ public class TransactionStatisticsServiceImplTest {
     private TransactionStatisticsCache transactionStatisticsCache;
 
     @Test
-    public void getDefaultStatistics() {
+    public void getDefaultStatistics_shouldCallGetLastMinute() {
         transactionStatisticsService.getDefaultStatistics();
 
         verify(transactionStatisticsCache).getLastMinute();

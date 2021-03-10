@@ -36,7 +36,7 @@ public class TransactionControllerTest {
     private TransactionService transactionService;
 
     @Test
-    public void create_validRequest_shouldReturn201() throws Exception {
+    public void validRequest_shouldReturn201() throws Exception {
         doNothing()
                 .when(transactionService).create(any(Transaction.class));
 
@@ -44,7 +44,7 @@ public class TransactionControllerTest {
     }
 
     @Test()
-    public void create_olderThan60Secs_shouldReturn204() throws Exception {
+    public void olderThan60Secs_shouldReturn204() throws Exception {
         doThrow(TransactionException.class)
                 .when(transactionService).create(any(Transaction.class));
 

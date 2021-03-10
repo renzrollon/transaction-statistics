@@ -34,7 +34,7 @@ public class TransactionStatisticsCacheImplTest {
     }
 
     @Test
-    public void getLastMinute_noTransactions_shouldReturnDefaultStatistics() throws Exception {
+    public void noTransactions_shouldReturnDefaultStatistics() throws Exception {
         TransactionStatistics statistics = transactionStatisticsCache.getLastMinute();
 
         assertEquals(0, statistics.getCount());
@@ -45,7 +45,7 @@ public class TransactionStatisticsCacheImplTest {
     }
 
     @Test
-    public void getLastMinute_oneValidTransaction_shouldReturnCorrectValues() throws Exception {
+    public void oneValidTransaction_shouldReturnCorrectValues() throws Exception {
         long currentTime = System.currentTimeMillis();
         BigDecimal amount = new BigDecimal("12.30");
         Transaction transaction = new Transaction(amount, currentTime);
@@ -60,7 +60,7 @@ public class TransactionStatisticsCacheImplTest {
     }
 
     @Test(expected = TransactionException.class)
-    public void getLastMinute_oneOldTransaction_shouldReturnDefaultStatistics() throws Exception {
+    public void oneOldTransaction_shouldThrowException() throws Exception {
         long currentTime = System.currentTimeMillis();
         BigDecimal amount = new BigDecimal("12.30");
         Transaction transaction = new Transaction(amount, currentTime - 61000);
@@ -69,7 +69,7 @@ public class TransactionStatisticsCacheImplTest {
     }
 
     @Test(expected = TransactionException.class)
-    public void getLastMinute_oneFutureTransaction_shouldReturnException() throws Exception {
+    public void oneFutureTransaction_shouldThrowException() throws Exception {
         long currentTime = System.currentTimeMillis();
         BigDecimal amount = new BigDecimal("12.30");
         Transaction transaction = new Transaction(amount, currentTime + 10000);
@@ -78,7 +78,7 @@ public class TransactionStatisticsCacheImplTest {
     }
 
     @Test
-    public void getLastMinute_twoValidTransactionsSameTime_shouldReturnCorrectValues() throws Exception {
+    public void twoValidTransactionsSameTime_shouldReturnCorrectValues() throws Exception {
         long currentTime = System.currentTimeMillis();
         BigDecimal amount = new BigDecimal("12.30");
         Transaction transaction = new Transaction(amount, currentTime);
@@ -99,7 +99,7 @@ public class TransactionStatisticsCacheImplTest {
     }
 
     @Test
-    public void getLastMinute_twoValidTransactionsDifferentTime_shouldReturnCorrectValues() throws Exception {
+    public void twoValidTransactionsDifferentTime_shouldReturnCorrectValues() throws Exception {
         long currentTime = System.currentTimeMillis();
         BigDecimal amount = new BigDecimal("12.3");
         Transaction transaction = new Transaction(amount, currentTime);

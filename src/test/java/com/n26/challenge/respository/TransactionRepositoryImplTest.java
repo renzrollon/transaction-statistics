@@ -25,7 +25,7 @@ public class TransactionRepositoryImplTest {
     private TransactionStatisticsCache transactionStatisticsCache;
 
     @Test
-    public void testSave() throws TransactionException {
+    public void save_shouldCallCacheAddTransaction() throws TransactionException {
         Transaction mock = Mockito.mock(Transaction.class);
         transactionRepository.save(mock);
 
